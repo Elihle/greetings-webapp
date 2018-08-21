@@ -19,9 +19,9 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
-  let returnValue = greetMe.allGreets();
+  let count = greetMe.countAllGreets();
   res.render('home', {
-    returnValue
+    count
   });
 });
 
@@ -29,10 +29,12 @@ app.post('/greet', function (req, res) {
   let greeted = req.body.input;
   let input = req.body.language;
   let greetName = greetMe.allGreetings(input, greeted);
+  let count = greetMe.countAllGreets();
 
   res.render('home', {
-    greetName
-  })
+    greetName,
+    count
+  });
   console.log(greeted)
 });
 

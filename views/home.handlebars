@@ -14,17 +14,18 @@
       <input type="radio" name="language" class="language" value="isiXhosa">isiXhosa
 
     </div>
-    <p>
+    <p>     
+      <div class="counter" name="counterAll" value="count"><b>Counter:{{count}}</b></div>
       <p>
         <div class="row">
           <div class="three columns">
-              <button class="greetMeBtn" id="greetMeBtn" type="submit" name="greeted" value="{{greet}}">GREET ME</button>
-              <button class="resetBtn" id="resetBtn" type="submit" name="reset" value="{{reset}}">RESET</button>       
+            <button class="greetMeBtn" id="greetMeBtn" type="submit" name="greeted" value="{{greet}}">GREET ME</button>
+            <button class="resetBtn" id="resetBtn" type="submit" name="reset" value="{{reset}}">RESET</button>
           </div>
           </form>
 
           <div class="three columns">
-              <div class="greeting" name="greetMsg" value="">{{greetName}}</div>
+            <div class="greeting" name="greetMsg" value="">{{greetName}}</div>
           </div>
         </div>
         </form>

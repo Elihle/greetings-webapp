@@ -19,36 +19,26 @@ module.exports = function Greetings(stored) {
     }
   }
 
-  function setName(value) {
-    name = value;
-  }
-
-  function setLanguage(value) {
-    language = value;
-  }
-
   function greetSpottedCounter() {
-    // let storedNames = JSON.parse(localStorage.getItem("greetedNames"));
-    //  return Object.keys(storedNames).length;
-    return storedNames;
+    let storedNames = greetedNames;
+     return Object.keys(storedNames).length;
+    // return storedNames;
   }
 
   function greetCounter() {
     return greetedNames;
   }
 
-  function allGreets(){
-  name,
-  language,
-  greetedNames
+  function allGreets() {
+  // name,
+  // language,
+  // greetedNames
   }
 
   return {
     allGreetings: greet,
     countAllGreets: greetSpottedCounter,
     countAllNames: greetCounter,
-    setInput: setName,
-    setOptions: setLanguage,
     allGreets
   }
 }
