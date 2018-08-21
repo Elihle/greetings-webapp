@@ -37,11 +37,18 @@ module.exports = function Greetings(stored) {
     return greetedNames;
   }
 
+  function allGreets(){
+  name,
+  language,
+  greetedNames
+  }
+
   return {
     allGreetings: greet,
     countAllGreets: greetSpottedCounter,
     countAllNames: greetCounter,
     setInput: setName,
-    setOptions: setLanguage
+    setOptions: setLanguage,
+    allGreets
   }
 }

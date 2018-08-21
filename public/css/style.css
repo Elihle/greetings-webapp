@@ -7,25 +7,35 @@
   
   #greetMeBtn {
     background-color: #00EE76;
-    color: white;
+    color: black;
     align-content: center;
-    font-weight: bold;
     border:2em black;
-    margin-left: 30em;
-    margin-bottom: 5em;
+    /* margin-left: 30em;
+    margin-bottom: 5em; */
+  }
+
+  .resetBtn {
+    background-color: #00EE76;
+    color: black;
+    align-content: center;
+    border:2em black;
+    /* margin-left: 30em;
+    margin-bottom: 5em; */
   }
   .language {
     font-weight: bold;
-    /* margin-bottom: 5em;
-    margin-top: 5em; */
   }
 
   h1 {
     color: black;
     font-weight: bolder;
-    /* background-color: white; */
   }
   
+  .greeting{
+    margin-top: 5em;
+    background-color: white;
+    text-align: center;
+  }
  /* h1 {
     color: #ca8f    background-color: #e3dcc0;
 42;

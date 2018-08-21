@@ -3,32 +3,28 @@
 </div>
 <p>
   <div class="">
-         <form action="/greet" method="POST">
-    Name :
-    <input type="text" class="inputName" id="nameInput" name="input" placeholder="enter your name here" value="{{enterInput}}">
+    <form action="/greet" method="POST">
+      Name :
+      <input type="text" class="inputName" id="nameInput" name="input" placeholder="enter your name here" value="{{enterInput}}">
   </div>
   <p>
     <div class="RadioBtn">
-        <input type="radio" name="language" class="language" id="lang" value="{{English}}">English
-        <input type="radio" name="language" class="language" value="{{Afrikaans}}">Afrikaans
-        <input type="radio" name="language" class="language" value="{{isiXhosa}}">isiXhosa
-     
-    </div>
+      <input type="radio" name="language" class="language" value="English">English
+      <input type="radio" name="language" class="language" value="Afrikaans">Afrikaans
+      <input type="radio" name="language" class="language" value="isiXhosa">isiXhosa
 
+    </div>
     <p>
       <p>
         <div class="row">
           <div class="three columns">
-            {{!-- <form action="/greet" method="POST"> --}}
               <button class="greetMeBtn" id="greetMeBtn" type="submit" name="greeted" value="{{greet}}">GREET ME</button>
-            {{!-- </form> --}}
+              <button class="resetBtn" id="resetBtn" type="submit" name="reset" value="{{reset}}">RESET</button>       
           </div>
-            </form>
+          </form>
 
           <div class="three columns">
-            <form action="/action" method="POST">
-            {{!-- <input type="Submit" name="submit" value="{{reset}}" class="resetBtn" id="greetMeBtn"> --}}
-            <div class="greeting" name="greetMsg" value="{{greetMsg}}"></div>
+              <div class="greeting" name="greetMsg" value="">{{greetName}}</div>
           </div>
         </div>
         </form>
