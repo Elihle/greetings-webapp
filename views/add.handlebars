@@ -1,0 +1,27 @@
+<h1>Greeted Names</h1>
+
+<a href="/add">All greeted names</a>
+
+<h2>greetings</h2>
+
+<table>
+    <tr>
+        <th>Greeted Names</th>
+        <th>Spotted count</th>
+        <th></th>
+    </tr>
+
+    {{#each greeted}}
+        <tr>
+        <td>{{greeted_names}}</td>
+        <td>{{spotted_greetings}}</td>
+        <td>
+            <form action="/spotted/{{id}}" method="post">
+                <input type="hidden" name="name_id" value="{{id}}">
+                <input type="submit" value="Spotted">
+            </form>
+        </td>
+    </tr>
+    {{/each}}
+
+</table>
