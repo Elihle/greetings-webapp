@@ -1,0 +1,22 @@
+<div class="row">
+    <h1>Greeted Names</h1>
+
+    <table>
+        <thead>
+            {{!-- <th>ID</th> --}}
+            <th>Greeted Names</th>
+            <th>Spotted Count</th>
+        </thead>
+   
+        <tbody>
+                  {{#each database}}
+            {{!-- <td>{{id}}</td> --}}
+            <td>{{greeted_names}}</td>
+            <td>{{spotted_greetings}}</td>
+        </tr>
+        {{/each}}
+        </tbody>
+  
+
+    </table>
+</div>

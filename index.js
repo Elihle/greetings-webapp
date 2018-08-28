@@ -3,9 +3,12 @@ let Greetings = require('./greetings');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 
-let app = express();
+// let app = express();
 let greetMe = Greetings();
 
+const session = require('express-session');
+const pg = require("pg");
+const Pool = pg.Pool;
 // should we use a SSL connection
 let useSSL = false;
 let local = process.env.LOCAL || false;
@@ -40,37 +43,49 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-app.get('/', function (req, res) {
+app.get('/', async function (req, res) {
   let count = greetMe.countAllGreets();
+
   res.render('home', {count});
 });
 
-app.post('/greet', function (req, res) {
+app.post('/greet', async function (req, res) {
   let name = req.body.name;
   let language = req.body.language;
   let greetName = greetMe.allGreetings(language, name);
   let count = greetMe.countAllGreets();
 
+  // if (name != '' && language != undefined){
+  //   let user = await pool.query('SELECT * FROM greetings WHERE greeted_names = $1, [name]');
+  //   if (user.rows.length === 0){
+  //    await pool.query('INSERT INTO greetings(greeted_names, spotted_greetings) values ($1, $2)', [name, language]);
+  //     await pool.query('INSERT INTO countGreet (count) values ($1)', [1]);
+  //     greetMe.alGreetings(name, language);
+  //   }
+  //   else {
+  //     let counter = await pool.query('SELECT ')
+  //   }
+  // }
   res.render('home', {greetName,count});
 });
 
-app.get('/greet/:name/:language', function (req, res) {
+app.get('/greet/:name/:language', async function (req, res) {
   let name = req.params.name;
   let language = req.params.language;
   let greetName = greetMe.allGreetings(language, name);
   let count = greetMe.countAllGreets();
-  console.log(req.params);
   
   res.render('home', {greetName, count});
 });
 
-app.post('/add', async function(req, res) {
-  let personName = req.body.greeted_names;
-  if (personName && personName !== '') {
-      await pool.query('insert into greeted (greeted_names, spotted_greetings) values ($1, $2)' , [personName, 1]);    
+app.get('/greeted', async function (req, res) {
+  try {
+    let results = await pool.query('select * from greetings');
+    let database = results.rows;
+    res.render('greeted', {database});
+  } catch (err) {
+    res.send(err.stack);
   }
-
-  res.redirect('/');
 });
 
 let PORT = process.env.PORT || 3007;
