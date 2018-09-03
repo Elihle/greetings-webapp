@@ -1,12 +1,9 @@
 module.exports = function Greetings(stored) {
   let greetedNames = stored || {};
-  let name = '';
-  let language = '';
 
-  function greet(language, name) {
+ function greet(language, name) {
     if (greetedNames[name] === undefined) {
       greetedNames[name] = 0;
-      // localStorage.setItem('greetedNames',JSON.stringify(greetedNames));
     }
     if (language === 'English') {
       return 'Hello, ' + name;

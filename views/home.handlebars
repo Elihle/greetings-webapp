@@ -16,24 +16,24 @@
     </div>
     <p>
       <div class="counter" name="counterAll" value="count">
-        <b>Counter:{{count}}</b>
+        <b>Counter:{{databaseLength}}</b>
       </div>
       <p>
         <div class="row">
           <div class="three columns">
-            <button class="greetMeBtn" id="greetMeBtn" type="submit" name="greeted" value="{{greet}}">GREET ME</button>           
+            <button class="greetMeBtn" id="greetMeBtn" type="submit" name="greeted" value="{{greet}}">GREET ME</button>
           </div>
           </form>
 
           <div class="three columns">
             <div class="greeting" name="greetMsg" value="">{{greetName}}</div>
           </div>
-        </form>
-      <div class="three columns">
-        <form action="/greeted" method="POST">
-          <button class="resetBtn" id="resetBtn" type="submit" name="greets" value="{{reset}}">GREETED NAMES</button>
-        </form>
-    </div>
-    </div>
-      
+          </form>
+          <div class="three columns">
+            <form action="/greeted" method="POST">
+              <button class="resetBtn" id="resetBtn" type="submit" name="greets" value="{{reset}}">GREETED NAMES</button>
+            </form>
+          </div>
+        </div>
+        
         </div>
