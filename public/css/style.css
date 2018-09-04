@@ -14,11 +14,11 @@
     margin-bottom: 5em; */
   }
 
-  .resetBtn {
+  #allNames button{
     background-color: #00EE76;
     color: black;
     border:2em black;
-    float: right;
+    /* float: right; */
   }
   .language {
     font-weight: bold;

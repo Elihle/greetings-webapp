@@ -28,12 +28,15 @@
           <div class="three columns">
             <div class="greeting" name="greetMsg" value="">{{greetName}}</div>
           </div>
-          </form>
+
+           <div class="three columns">
+            <div class="greeting" name="greetMsg" value="">{{messages.error}}</div>
+            
+          </div>
+
           <div class="three columns">
-            <form action="/greeted" method="POST">
-              <button class="resetBtn" id="resetBtn" type="submit" name="greets" value="{{reset}}">GREETED NAMES</button>
-            </form>
+            <button><a href="/greeted" class="allNames" id="allNames">GREETED NAMES</a></button>                                                                                                                                                                                                                                                                                                                                                                                                                               
           </div>
         </div>
-        
+
         </div>
