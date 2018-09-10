@@ -1,3 +1,20 @@
+# language: node_js
+# node_js:
+#   - "v8.9.4"
+
+
 language: node_js
-node_js:
-  - "v8.9.4"
+
+env:
+  - DATABASE_URL=postgresql://coder:coder@localhost:5432/greetings'
+
+node_js:  
+  - "8.9.4"
+
+before_script:
+  - psql -c 'create database afternoon-peak-24134;' -U postgres
+  - psql -U postgres -d afternoon-peak-24134 -a -f table.sql
+
+addons:
+    apt:
+    packages:
