@@ -9,8 +9,8 @@ const Pool = pg.Pool;
 // should we use a SSL connection
 let useSSL = false;
 let local = process.env.LOCAL || false;
-if (process.env.DATABASE_URL && !local){
-    useSSL = true;
+if (process.env.DATABASE_URL && !local) {
+  useSSL = true;
 }
 
 const flash = require('express-flash');
@@ -45,30 +45,43 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.get('/', async function (req, res) {
-  // let count = greetMe.countAllGreets();
   let counting = await pool.query('select count(*) from greetings');
   let databaseLength = counting.rows[0].count;
-  res.render('home', {databaseLength});
+  res.render('home', {
+    databaseLength
+  });
 });
 
 app.post('/greet', async function (req, res) {
-  let name = req.body.name;
-  let language = req.body.language;
-  let greetName = greetMe.allGreetings(language, name);
-
-  let user = await pool.query('select * from greetings where greeted_names = $1', [name]);
-  if (user.rows.length != 0){
-  let spottedCount = user.rows[0].spotted_greetings;
-  spottedCount++;
-  await pool.query('UPDATE greetings SET spotted_greetings = $1 where greeted_names = $2', [spottedCount, name]);
+  try {
+    let name = req.body.name;
+    let language = req.body.language;
+    let greetName = greetMe.allGreetings(language, name);
+  
+    if (language === undefined || name === '') {
+  
+    } else {
+      let user = await pool.query('select * from greetings where greeted_names = $1', [name]);
+      if (user.rows.length != 0) {
+        let spottedCount = user.rows[0].spotted_greetings;
+        spottedCount++;
+        await pool.query('UPDATE greetings SET spotted_greetings = $1 where greeted_names = $2 ', [spottedCount, name]);
+      } else {
+        await pool.query('INSERT INTO greetings (greeted_names, spotted_greetings, languages) values ($1, $2, $3)', [name, 1, language]);
+      }
+    }
+  
+    let counting = await pool.query('select count(*) from greetings');
+    let databaseLength = counting.rows[0].count;
+  
+    res.render('home', {
+      greetName,
+      databaseLength,
+    });
+  } catch(err){
+    res.send(err.stack)
   }
-  else {
-    await pool.query('INSERT INTO greetings (greeted_names, spotted_greetings) values ($1, $2)', [name, 1]);
-  }
-  let counting = await pool.query('select count(*) from greetings');
-  let databaseLength = counting.rows[0].count;
 
-  res.render('home', {greetName,databaseLength, user});
 });
 
 app.get('/greet/:name/:language', async function (req, res) {
@@ -78,18 +91,21 @@ app.get('/greet/:name/:language', async function (req, res) {
   // let count = greetMe.countAllGreets();
 
   let user = await pool.query('select * from greetings where greeted_names = $1', [name]);
-  if (user.rows.length != 0){
-  let spottedCount = user.rows[0].spotted_greetings;
-  spottedCount++;
-  await pool.query('UPDATE greetings SET spotted_greetings = $1 where greeted_names = $2', [spottedCount, name]);
-  }
-  else {
-  await pool.query('INSERT INTO greetings (greeted_names, spotted_greetings) values ($1, $2)', [name, 1]);
+  if (user.rows.length != 0) {
+    let spottedCount = user.rows[0].spotted_greetings;
+    spottedCount++;
+    await pool.query('UPDATE greetings SET spotted_greetings = $1 where greeted_names = $2', [spottedCount, name]);
+  } else {
+    await pool.query('INSERT INTO greetings (greeted_names, spotted_greetings, languages) values ($1, $2, $3)', [name, 1, language]);
   }
   let counting = await pool.query('select count(*) from greetings');
   let databaseLength = counting.rows[0].count;
 
-res.render('home', {greetName, databaseLength, user});
+  res.render('home', {
+    greetName,
+    databaseLength,
+    user
+  });
 });
 
 //keep in database
@@ -97,17 +113,29 @@ app.get('/greeted', async function (req, res) {
   try {
     let results = await pool.query('select * from greetings');
     let database = results.rows;
-    res.render('greeted', {database});
+    res.render('greeted', {
+      database
+    });
   } catch (err) {
     res.send(err.stack);
   }
 });
 
-  app.get('/add/:name', async function(req, res) {
-    let username = req.params.name;
-    let counting = await pool.query('select * from greetings where greeted_names = $1', [username]);
-    let count = counting.rows[0].spotted_greetings;
-    res.render('add', {count, username});
+app.get('/add/:name', async function (req, res) {
+  let username = req.params.name;
+  let counting = await pool.query('select * from greetings where greeted_names = $1', [username]);
+  let count = counting.rows[0].spotted_greetings;
+  res.render('add', {
+    count,
+    username
+  });
+});
+
+app.get('/reset', async function (req, res) {
+  let reset = await pool.query('delete from greetings');
+  res.render('home', {
+    reset
+  })
 });
 
 let PORT = process.env.PORT || 3007;

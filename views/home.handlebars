@@ -1,42 +1,105 @@
+{{!--
 <div class="row">
   <h1>GREETINGS</h1>
 </div>
 <p>
-  <div class="">
+  <div class="all-content">
     <form action="/greet/" method="POST">
-      Name :
+      <b>Name :</b>
       <input type="text" class="inputName" id="nameInput" name="name" placeholder="enter your name here" value="{{enterInput}}">
   </div>
   <p>
     <div class="RadioBtn">
-      <input type="radio" name="language" class="language" value="English">English
-      <input type="radio" name="language" class="language" value="Afrikaans">Afrikaans
-      <input type="radio" name="language" class="language" value="isiXhosa">isiXhosa
+      <input type="radio" name="language" class="language" value="English {{language}}">
+      <b>English</b>
+      <input type="radio" name="language" class="language" value="Afrikaans {{language}}">
+      <b>Afrikaans</b>
+      <input type="radio" name="language" class="language" value="isiXhosa {{language}}">
+      <b>isiXhosa</b>
 
     </div>
     <p>
       <div class="counter" name="counterAll" value="count">
-        <b>Counter:{{databaseLength}}</b>
+        <b>Count:{{databaseLength}}</b>
       </div>
       <p>
         <div class="row">
-          <div class="three columns">
+          <div class="five columns">
             <button class="greetMeBtn" id="greetMeBtn" type="submit" name="greeted" value="{{greet}}">GREET ME</button>
           </div>
           </form>
 
-          <div class="three columns">
-            <div class="greeting" name="greetMsg" value="">{{greetName}}</div>
-          </div>
+          <div class="row">
+            <div class="twelve columns">
+              {{!--
+              <button>
+                <a href="/" class="greetMeBtn" id="greetMeBtn" type="submit" name="greeted" value="{{greet}}">GREET ME</a>
+              </button> --}} {{!--
+              <button>
+                <a href="/greeted" class="allNames" id="allNames">GREETED NAMES</a>
+              </button>
+              <button>
+                <a href="/reset" class="allNames" id="reset">RESET</a>
+              </button>
 
-           <div class="three columns">
-            <div class="greeting" name="greetMsg" value="">{{messages.error}}</div>
-            
+            </div>
           </div>
-
-          <div class="three columns">
-            <button><a href="/greeted" class="allNames" id="allNames">GREETED NAMES</a></button>                                                                                                                                                                                                                                                                                                                                                                                                                               
+          <div class="row">
+            <div class="twelve columns">
+              <div class="greeting" name="greetMsg" value="">{{greetName}}</div>
+            </div>
           </div>
         </div>
+        </div> --}}
 
+
+
+
+
+        <div class="row">
+          <h1>GREETINGS</h1>
         </div>
+        <p>
+          <div class="">
+            <form action="/greet/" method="POST">
+              Name :
+              <input type="text" class="inputName" id="nameInput" name="name" placeholder="enter your name here" value="{{enterInput}}">
+          </div>
+          <p>
+            <div class="RadioBtn">
+              <input type="radio" name="language" class="language" value="English">English
+              <input type="radio" name="language" class="language" value="Afrikaans">Afrikaans
+              <input type="radio" name="language" class="language" value="isiXhosa">isiXhosa
+
+            </div>
+            <p>
+              <div class="counter" name="counterAll" value="count">
+                <b>Counter:{{databaseLength}}</b>
+              </div>
+              <p>
+                <div class="row">
+                  <div class="three columns">
+                    <button class="greetMeBtn" id="greetMeBtn" type="submit" name="greeted" value="{{greet}}">GREET ME</button>
+                  </div>
+                  </form>
+
+                  <div class="three columns">
+                    <div class="greeting" name="greetMsg" value="">{{greetName}}</div>
+                  </div>
+
+                  <div class="three columns">
+                    <div class="greeting" name="greetMsg" value="">{{messages.error}}</div>
+
+                  </div>
+
+                  <div class="three columns">
+                    <button>
+                      <a href="/greeted" class="allNames" id="allNames">GREETED NAMES</a>
+                    <button>
+                    <a href="/reset" class="allNames" id="reset">RESET</a>
+                    </button>
+                    </button>
+                  </div>
+                </div>
+
+                </div>

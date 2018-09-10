@@ -1,76 +1,56 @@
 .container {
-    background-color: #8B668B;
-    font-size: 1.5em;
-    text-align: center;
-    margin-top: 5em;
-  }
-  
-  #greetMeBtn {
-    background-color: #00EE76;
-    color: black;
-    align-content: center;
-    border:2em black;
-    /* margin-left: 30em;
-    margin-bottom: 5em; */
-  }
-
-  #allNames button{
-    background-color: #00EE76;
-    color: black;
-    border:2em black;
-    /* float: right; */
-  }
-  .language {
-    font-weight: bold;
-  }
-
-  h1 {
-    color: black;
-    font-weight: bolder;
-  }
-  
-  .greeting{
-    margin-top: 5em;
-    background-color: white;
-    text-align: center;
-  }
- /* h1 {
-    color: #ca8f    background-color: #e3dcc0;
-42;
-  }
-  
-  .greeting {
-    color: red;
-    font-size: 2em;
-    font-weight: 20em;
-  }
-  
-  .theCounter {
-    font-size: 1.5em;
-    color: #131313;
-    letter-spacing: .15em;
-    text-shadow: 1px -1px 0 #767676, -1px 2px 1px #737272;
-  } */
+  background-color: white;
+  font-size: 1.5em;
+  text-align: center;
+  margin-top: 5em;
+  border: 2px solid black;
+  border-radius: 100%;
+}
 
 
+button {
+  background-color: 	#228B22;
+  color: black;
+  border: 2px solid #4CAF50;
+  text-decoration: none;
+}
 
+button a {
+  background-color: 	#228B22;
+  color: black;
+  text-decoration: none;
+}
+#reset button{
+  background-color: #A52A2A;
+}
 
+.language {
+  font-weight: bold;
+}
 
+h1 {
+  color: black;
+  font-weight: bolder;
+  background-color:#FFA500;
+}
 
+.greeting {
+  margin-top: 5em;
+  background-color: white;
+  text-align: center;
+}
 
+.counter {
+  font-size: 2em;
+}
 
+.tables th{
+  background-color: #FFA500;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.tables{
+  background-color: white;
+}
 /* .wrapper {
     background-color: #d2b48c;
     margin-top: 5em;

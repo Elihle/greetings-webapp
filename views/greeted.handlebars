@@ -1,25 +1,21 @@
-<div class="row">
-    <h1>Greeted Names</h1>
-
-    <table>
-        <thead>
-            {{!--
-            <th>ID</th> --}}
-            <th>Greeted Names</th>
-            <th>Spotted Count</th>
-            <th>Times greeted</th>
-        </thead>
-
-        <tbody>
-            {{#each database}}
-            <td>{{greeted_names}}</td>
-            <td>{{spotted_greetings}}</td>
-            <td>
-            <button><a href="/add/{{greeted_names}}">Added Names</a></button>
-            </tr>
-            {{/each}}
+<div class="row tables">
+    <TABLE BORDER="2" WIDTH="100%">
+            <TR>
+                <th>GREETED NAMES</th>
+                <th>LANGUAGES</th>
+                <th>COUNTER</th>
+            </TR>
+            <tbody>
+                {{#each database}}
+                <td>{{greeted_names}}</td>
+                <td>{{languages}}</td>
+                <td>
+                    <button>
+                        <a href="/add/{{greeted_names}}">count</a>
+                    </button>
+        </tr>
+        {{/each}}
+        </TR>
         </tbody>
-
-
-    </table>
+    </TABLE>
 </div>
