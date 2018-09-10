@@ -12,8 +12,8 @@ node_js:
   - "8.9.4"
 
 before_script:
-  - psql -c 'create database afternoon-peak-24134;' -U postgres
-  - psql -U postgres -d afternoon-peak-24134 -a -f table.sql
+  - psql -c 'create database greetings;' -U postgres
+  - psql -U postgres -d greetings -a -f table.sql
 
 addons:
     apt:
