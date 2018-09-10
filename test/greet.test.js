@@ -17,7 +17,7 @@ const pool = new Pool({
   ssl: useSSL
 });
 
-describe('count users in db', function(){
+describe('count names in database', function(){
     beforeEach(async function(){
         await pool.query('delete from greetings');
     });
@@ -51,7 +51,7 @@ describe('count users in db', function(){
 
 
     beforeEach(async function(){
-        await pool.query('delete from greetings');
+        await pool.query('should count number of people greeted');
     });
     it ('count', async function(){
         let greet = greetServices(pool);
