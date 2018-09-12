@@ -41,7 +41,7 @@ describe('count names in database', function(){
     beforeEach(async function(){
         await pool.query('delete from greetings');
     });
-    it ('should return two greeted person', async function(){
+    it ('should return two greeted people', async function(){
         let greet = greetServices(pool);
         await greet.inputData('Lihle', 'Molo');
         await greet.inputData('Ayanda', 'Molo');    
@@ -55,6 +55,8 @@ describe('count names in database', function(){
     // });
     // it ('count', async function(){
     //     let greet = greetServices(pool);
+    //     await greet.inputData('Ayanda', 'Molo');    
+
     //     await greet.countAll();
     //     let results = await greet.myData();
     //    assert.strictEqual(results.length, 2);

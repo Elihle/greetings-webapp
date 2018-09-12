@@ -1,7 +1,9 @@
 let express = require('express');
-let Greetings = require('./greetings');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
+const Services = require('./services/greet');
+const Routes = require('./routes/routes');
+let Greetings = require('./greetings');
 
 let greetMe = Greetings();
 const pg = require("pg");
@@ -23,6 +25,9 @@ const pool = new Pool({
   connectionString,
   ssl: useSSL
 });
+
+let services = Services(pool);
+let routes = Routes(services);
 
 const app = express();
 app.use(session({
@@ -52,37 +57,40 @@ app.get('/', async function (req, res) {
   });
 });
 
-app.post('/greet', async function (req, res) {
-  try {
-    let name = req.body.name;
-    let language = req.body.language;
-    let greetName = greetMe.allGreetings(language, name);
+app.post('/greet', routes.greetUser);
+// app.post('/greet', async function (req, res) {
+//   routes.greetUser,
+//   routes.counting
+  // try {
+  //   let name = req.body.name;
+  //   let language = req.body.language;
+  //   let greetName = greetMe.allGreetings(language, name);
   
-    if (language === undefined || name === '') {
+  //   if (language === undefined || name === '') {
   
-    } else {
-      let user = await pool.query('select * from greetings where greeted_names = $1', [name]);
-      if (user.rows.length != 0) {
-        let spottedCount = user.rows[0].spotted_greetings;
-        spottedCount++;
-        await pool.query('UPDATE greetings SET spotted_greetings = $1 where greeted_names = $2 ', [spottedCount, name]);
-      } else {
-        await pool.query('INSERT INTO greetings (greeted_names, spotted_greetings, languages) values ($1, $2, $3)', [name, 1, language]);
-      }
-    }
+  //   } else {
+  //     let user = await pool.query('select * from greetings where greeted_names = $1', [name]);
+  //     if (user.rows.length != 0) {
+  //       let spottedCount = user.rows[0].spotted_greetings;
+  //       spottedCount++;
+  //       await pool.query('UPDATE greetings SET spotted_greetings = $1 where greeted_names = $2 ', [spottedCount, name]);
+  //     } else {
+  //       await pool.query('INSERT INTO greetings (greeted_names, spotted_greetings, languages) values ($1, $2, $3)', [name, 1, language]);
+  //     }
+  //   }
   
-    let counting = await pool.query('select count(*) from greetings');
-    let databaseLength = counting.rows[0].count;
+  //   let counting = await pool.query('select count(*) from greetings');
+  //   let databaseLength = counting.rows[0].count;
   
-    res.render('home', {
-      greetName,
-      databaseLength,
-    });
-  } catch(err){
-    res.send(err.stack)
-  }
+  //   res.render('home', {
+  //     greetName,
+  //     databaseLength,
+  //   });
+  // } catch(err){
+  //   res.send(err.stack)
+  // }
 
-});
+// });
 
 app.get('/greet/:name/:language', async function (req, res) {
   let name = req.params.name;
@@ -109,17 +117,7 @@ app.get('/greet/:name/:language', async function (req, res) {
 });
 
 //keep in database
-app.get('/greeted', async function (req, res) {
-  try {
-    let results = await pool.query('select * from greetings');
-    let database = results.rows;
-    res.render('greeted', {
-      database
-    });
-  } catch (err) {
-    res.send(err.stack);
-  }
-});
+app.get('/greeted', routes.listAll);
 
 app.get('/add/:name', async function (req, res) {
   let username = req.params.name;
