@@ -5,14 +5,13 @@ const Services = require('./services/greet');
 const Routes = require('./routes/routes');
 let Greetings = require('./greetings');
 
-let greetMe = Greetings();
-const pg = require("pg");
+const pg = require('pg');
 const Pool = pg.Pool;
 // should we use a SSL connection
 let useSSL = false;
 let local = process.env.LOCAL || false;
 if (process.env.DATABASE_URL && !local) {
-  useSSL = true;
+    useSSL = true;
 }
 
 const flash = require('express-flash');
@@ -22,121 +21,41 @@ const session = require('express-session');
 const connectionString = process.env.DATABASE_URL || 'postgresql://coder:coder@localhost:5432/greetings';
 
 const pool = new Pool({
-  connectionString,
-  ssl: useSSL
+    connectionString,
+    ssl: useSSL
 });
-
+let greetMe = Greetings();
 let services = Services(pool);
-let routes = Routes(services);
+let routes = Routes(services, greetMe);
 
 const app = express();
 app.use(session({
-  secret: 'keyboard cat5 run all 0v3r',
-  resave: false,
-  saveUninitialized: true
+    secret: 'greetings exercise',
+    resave: false,
+    saveUninitialized: true
 }));
 
-//handlebars
+// handlebars
 app.engine('handlebars', exphbs({
-  defaultLayout: 'main'
+    defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
-  extended: false
+    extended: false
 }));
 // parse application/json
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-app.get('/', async function (req, res) {
-  let counting = await pool.query('select count(*) from greetings');
-  let databaseLength = counting.rows[0].count;
-  res.render('home', {
-    databaseLength
-  });
-});
-
+app.get('/', routes.homeRoute);
 app.post('/greet', routes.greetUser);
-// app.post('/greet', async function (req, res) {
-//   routes.greetUser,
-//   routes.counting
-  // try {
-  //   let name = req.body.name;
-  //   let language = req.body.language;
-  //   let greetName = greetMe.allGreetings(language, name);
-  
-  //   if (language === undefined || name === '') {
-  
-  //   } else {
-  //     let user = await pool.query('select * from greetings where greeted_names = $1', [name]);
-  //     if (user.rows.length != 0) {
-  //       let spottedCount = user.rows[0].spotted_greetings;
-  //       spottedCount++;
-  //       await pool.query('UPDATE greetings SET spotted_greetings = $1 where greeted_names = $2 ', [spottedCount, name]);
-  //     } else {
-  //       await pool.query('INSERT INTO greetings (greeted_names, spotted_greetings, languages) values ($1, $2, $3)', [name, 1, language]);
-  //     }
-  //   }
-  
-  //   let counting = await pool.query('select count(*) from greetings');
-  //   let databaseLength = counting.rows[0].count;
-  
-  //   res.render('home', {
-  //     greetName,
-  //     databaseLength,
-  //   });
-  // } catch(err){
-  //   res.send(err.stack)
-  // }
-
-// });
-
-app.get('/greet/:name/:language', async function (req, res) {
-  let name = req.params.name;
-  let language = req.params.language;
-  let greetName = greetMe.allGreetings(language, name);
-  // let count = greetMe.countAllGreets();
-
-  let user = await pool.query('select * from greetings where greeted_names = $1', [name]);
-  if (user.rows.length != 0) {
-    let spottedCount = user.rows[0].spotted_greetings;
-    spottedCount++;
-    await pool.query('UPDATE greetings SET spotted_greetings = $1 where greeted_names = $2', [spottedCount, name]);
-  } else {
-    await pool.query('INSERT INTO greetings (greeted_names, spotted_greetings, languages) values ($1, $2, $3)', [name, 1, language]);
-  }
-  let counting = await pool.query('select count(*) from greetings');
-  let databaseLength = counting.rows[0].count;
-
-  res.render('home', {
-    greetName,
-    databaseLength,
-    user
-  });
-});
-
-//keep in database
+app.get('/greet/:name/:language', routes.greetOnUrl);
 app.get('/greeted', routes.listAll);
-
-app.get('/add/:name', async function (req, res) {
-  let username = req.params.name;
-  let counting = await pool.query('select * from greetings where greeted_names = $1', [username]);
-  let count = counting.rows[0].spotted_greetings;
-  res.render('add', {
-    count,
-    username
-  });
-});
-
-app.get('/reset', async function (req, res) {
-  let reset = await pool.query('delete from greetings');
-  res.render('home', {
-    reset
-  })
-});
+app.get('/add/:name', routes.tableData);
+app.get('/reset', routes.clearDb);
 
 let PORT = process.env.PORT || 3007;
 app.listen(PORT, function () {
-  console.log('App starting on port', PORT);
+    console.log('App starting on port', PORT);
 });

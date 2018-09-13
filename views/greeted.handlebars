@@ -1,21 +1,22 @@
-<div class="row tables">
-    <TABLE BORDER="2" WIDTH="100%">
-            <TR>
-                <th>GREETED NAMES</th>
-                <th>LANGUAGES</th>
-                <th>COUNTER</th>
-            </TR>
-            <tbody>
-                {{#each database}}
-                <td>{{greeted_names}}</td>
-                <td>{{languages}}</td>
-                <td>
-                    <button>
-                        <a href="/add/{{greeted_names}}">count</a>
-                    </button>
+<table class="table table-bordered">
+    <tr>
+        <th>NAME</th>
+        <th>LANGUAGE</th>
+        <th>COUNTER</th>
+    </tr>
+
+    <tbody>
+        <tr>
+            {{#each database}}
+            <td>{{greeted_names}}</td>
+            <td>{{languages}}</td>
+            <td>
+                <button>
+                    <a href="/add/{{greeted_names}}">count</a>
+                </button>
         </tr>
         {{/each}}
-        </TR>
-        </tbody>
-    </TABLE>
-</div>
+        </tr>
+    </tbody>
+
+</table>

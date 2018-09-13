@@ -1,17 +1,15 @@
-.container {
+/* .container {
   background-color: white;
   font-size: 1.5em;
   text-align: center;
   margin-top: 5em;
   border: 2px solid black;
-  border-radius: 100%;
 }
 
 
 button {
   background-color: 	#228B22;
   color: black;
-  border: 2px solid #4CAF50;
   text-decoration: none;
 }
 
@@ -24,11 +22,11 @@ button a {
   background-color: #A52A2A;
 }
 
-.language {
+/* .language {
   font-weight: bold;
-}
+} */
 
-h1 {
+/* h1 {
   color: black;
   font-weight: bolder;
   background-color:#FFA500;
@@ -42,12 +40,58 @@ h1 {
 
 .counter {
   font-size: 2em;
-}
+}  */
 
-.tables th{
+/* .tables th{
   background-color: #FFA500;
 }
 
 .tables{
   background-color: white;
+} */
+
+
+.container {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.header{
+  background-color: orange;
+  text-align: center;
+}
+.header h1 {
+  font-weight: bolder;
+  text-shadow: -1px -1px 1px #000, 1px 1px 1px #ccc;
+
+}
+
+.header img {
+  border-radius: 50%;
+  width: 10em;
+}
+
+fieldset {
+ padding: 3em;
+ background-color: #e4e4e3;
+}
+
+.form-radio {
+  margin-top: 1.5em;
+  margin-bottom: 5em;
+}
+
+hr {
+  width: 90%;
+  height: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color:orange;
+  border: 0 none;
+  margin-top: 5px;
+  margin-bottom:5px;
+   }
+table th {
+  font-weight: bolder;
+  background-color: #FA9D6D;
 }
