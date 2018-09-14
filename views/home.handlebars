@@ -7,7 +7,7 @@
       </div>
     </div>
   </div>
-  
+
   <form action="/greet" method="POST">
     <form class="well form-horizontal">
       <fieldset>
@@ -18,33 +18,36 @@
               <span class="input-group-addon">
                 <i class="glyphicon glyphicon-user"></i>
               </span>
-              <input id="fullName" name="name" placeholder="enter your name here" class="form-control" required="true" value="{{enterInput}}"
+              <input id="fullName" name="name" placeholder="enter your name here" class="form-control" value="{{enterInput}}"
                 type="text">
             </div>
           </div>
         </div>
 
-        <button type="submit" class="btn btn-success">Greet Me</button>
         <div class="counter" value="count">
-          <b>Counter:{{databaseLength}}</b>
+          <b><h2>Counter: {{databaseLength}}</h2></b>
         </div>
 
         <div class="form-radio">
           <div class="col-md-12">
             <label class="radio-inline">
-              <input type="radio" name="language" value="English" checked>English</label>
+              <input type="radio" name="language" value="Hello">English</label>
             <label class="radio-inline">
-              <input type="radio" name="language" value="Afrikaans">Afrikaans</label>
+              <input type="radio" name="language" value="Goeie more">Afrikaans</label>
             <label class="radio-inline">
-              <input type="radio" name="language" value="isiXhosa">isiXhosa</label>
+              <input type="radio" name="language" value="Molo">isiXhosa</label>
           </div>
+        </div>
+
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-success">Greet Me</button>
         </div>
     </form>
   </form>
 
   <div class="form-button">
     <div class="col-md-12">
-      <button type="submit" class="btn btn-success">
+     <button type="submit" class="btn btn-success">
         <a href="/greeted">Greeted Names</button>
       </a>
       <button type="submit" class="btn btn-danger">
@@ -52,14 +55,13 @@
       </a>
     </div>
   </div>
-
-  <div class="col-md-12">
-    <div class="greet-message">{{greetName}}</div>
-  </div>
+        <span class="entry">{{messages.info}}</span>
+        <span class="entryTwo">{{messages.infoTwo}}</span>
 </div>
 </div>
 <hr>
 </fieldset>
+</div>
 </div>
 </body>
 </body>

@@ -19,19 +19,22 @@ module.exports = function (services, greetMe) {
 
     async function greetUser (req, res) {
         try {
-            let name = req.body.name;
+            let name = req.body.name.toUpperCase();
             let language = req.body.language;
-            let greetName = greetMe.allGreetings(language, name);
 
-            if (language === undefined || name === '') {
-
+            if (language === undefined && name === '') {
+                req.flash('info', 'Please enter name and select language');
+            } else if (language === undefined) {
+                req.flash('info', 'Please select language');
+            } else if (name === '') {
+                req.flash('info', 'Please enter name');
             } else {
+                req.flash('infoTwo', language + ', ' + name);
                 await services.tryAddUser(name, language);
             }
 
             let databaseLength = await services.countAll();
             res.render('home', {
-                greetName,
                 databaseLength,
                 greetUser
             });
@@ -42,25 +45,28 @@ module.exports = function (services, greetMe) {
 
     async function greetOnUrl (req, res) {
         try {
-            let name = req.params.name;
+            let name = req.params.name.toUpperCase();
             let language = req.params.language;
-            let greetName = greetMe.allGreetings(language, name);
 
-            if (language === undefined || name === '') {
-
+            if (language === undefined && name === '') {
+                req.flash('info', 'Please enter name and select language');
+            } else if (language === undefined) {
+                req.flash('info', 'Please select language');
+            } else if (name === '') {
+                req.flash('info', 'Please enter name');
             } else {
+                req.flash('infoTwo', language + ', ' + name);
                 await services.tryAddUser(name, language);
             }
 
             let databaseLength = await services.countAll();
             res.render('home', {
-                greetName,
                 databaseLength,
                 greetUser
             });
         } catch (err) {
             res.send(err.stack);
-        };
+        }
     }
 
     async function tableData (req, res) {

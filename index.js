@@ -34,6 +34,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+app.use(flash());
 
 // handlebars
 app.engine('handlebars', exphbs({

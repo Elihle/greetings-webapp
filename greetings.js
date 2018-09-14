@@ -6,13 +6,13 @@ module.exports = function Greetings (stored) {
             greetedNames[name] = 0;
         }
         if (language === 'English') {
-            return 'Hello, ' + name;
+            return 'Hello, ' + name.toUpperCase();
         }
         if (language === 'Afrikaans') {
-            return 'Hallo, ' + name;
+            return 'Hallo, ' + name.toUpperCase();
         }
         if (language === 'isiXhosa') {
-            return 'Molo, ' + name;
+            return 'Molo, ' + name.toUpperCase();
         }
     }
 

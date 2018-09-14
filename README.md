@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.com/Elihle/greetings-webapp.svg?branch=master)](https://travis-ci.com/Elihle/greetings-webapp)
