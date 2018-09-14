@@ -59,7 +59,7 @@ button a {
   color: white;
 }
 
-a:hover {
+.form-button a:hover {
   color: white;
   text-decoration: none;
 }

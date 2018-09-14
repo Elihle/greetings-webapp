@@ -1,20 +1,15 @@
 <div class="row">
     <table class="table table-bordered">
         <tr>
-            <th>NAME</th>
-            <th>GREETING</th>
-            <th>COUNTER</th>
+            <th>NAMES</th>
+            {{!-- <th>GREETING</th> --}}
+            {{!-- <th>COUNTER</th> --}}
         </tr>
 
         <tbody>
             <tr>
                 {{#each database}}
-                <td>{{greeted_names}}</td>
-                <td>{{languages}}</td>
-                <td>
-                    <button type="submit" class="btn btn-success">
-                        <a href="/add/{{greeted_names}}">count</a>
-                    </button>
+                <td><a href="/add/{{greeted_names}}">{{greeted_names}}</a></td>
             </tr>
             {{/each}}
             </tr>
