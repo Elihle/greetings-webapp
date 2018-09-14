@@ -69,4 +69,10 @@ button a {
 
 .back {
   margin-left: 10em;
+
+}
+
+.back a:hover {
+  color: white;
+  text-decoration: none;
 }
