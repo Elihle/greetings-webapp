@@ -92,12 +92,30 @@ module.exports = function (services, greetMe) {
             res.send(err.stack);
         }
     }
+
+    async function backBtn (req, res) {
+        try {
+            res.redirect('/');
+        } catch (err) {
+            res.send(err.stack);
+        }
+    }
+
+    async function backToTable (req, res) {
+        try {
+            res.render('greeted');
+        } catch (err) {
+            res.send(err.stack);
+        }
+    }
     return {
         listAll,
         greetUser,
         homeRoute,
         greetOnUrl,
         tableData,
-        clearDb
+        clearDb,
+        backBtn,
+        backToTable
     };
 };

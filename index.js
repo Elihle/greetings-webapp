@@ -55,6 +55,8 @@ app.get('/greet/:name/:language', routes.greetOnUrl);
 app.get('/greeted', routes.listAll);
 app.get('/add/:name', routes.tableData);
 app.get('/reset', routes.clearDb);
+app.get('/back', routes.backBtn);
+app.get('/table', routes.backToTable);
 
 let PORT = process.env.PORT || 3007;
 app.listen(PORT, function () {

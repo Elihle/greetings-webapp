@@ -66,3 +66,7 @@ a:hover {
 .counter h2{
   font-weight: bolder;
 }
+
+.back {
+  margin-left: 10em;
+}

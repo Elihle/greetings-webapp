@@ -45,6 +45,7 @@ module.exports = function (pool) {
         let results = pool.query('delete from greetings');
         return results;
     }
+
     return {
         myData,
         selectUser,
