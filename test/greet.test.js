@@ -65,7 +65,7 @@ describe('count names in database', function () {
         await greet.insertUser('Lihle', 'Molo');
         await greet.insertUser('Ayanda', 'Molo');
         let results = await greet.countAll();
-        assert.strictEqual(results.length, 1);
+        assert.strictEqual(results, 2);
     });
 
     after(function () {

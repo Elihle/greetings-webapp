@@ -4,8 +4,3 @@ create table greetings(
     spotted_greetings int not null, 
     languages text
 );
-
-create table countGreet(
-    count int not null,
-    foreign key (count) references greetings(id)
-);

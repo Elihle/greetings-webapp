@@ -31,7 +31,7 @@ module.exports = function (pool) {
 
     async function countAll () {
         let counting = await pool.query('select count(*) from greetings');
-        let databaseLength = counting.rows[0].count;
+        let databaseLength = parseInt(counting.rows[0].count);
         return databaseLength;
     }
 
